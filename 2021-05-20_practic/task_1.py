@@ -36,15 +36,28 @@
 # угадать. Программа задает вопросы пользователю, на которые он отвечает
 # больше, меньше либо равно показанное ему программой число
 
-number = int(input('Введите число от 1 до 100: '))
-result = 100 // 2
-max = 100
+max = 1000000
 min = 1
-while result != number:
-    s = input(f'если ваше число Больше {result}, введите >, если меньше, то <  ')
+number = int(input(f'Введите число от {min} до {max}: '))
+mid = max // 2
+count = 1
+while True:
+    s = input(f'Ваше число {mid}? тогда введите "=", если ваше число Больше, введите ">", если Меньше, то "<":  ')
     if s == '<':
-        max = result
-        result = max // 2
+        max = mid - 1
+        mid = (max + min) // 2
+        if mid == number:
+            break
+        count += 1
+
     elif s == '>':
-        min = result
-        result = (max - min) // 2
+        min = mid + 1
+        mid = (max + min) // 2
+        if mid == number:
+            break
+        count += 1
+    elif s == '=':
+        break
+    else:
+        print('Для ввода используйте только символы >, < или =')
+print(f'Мы нашли ваше число {mid} с {count} попытки')
