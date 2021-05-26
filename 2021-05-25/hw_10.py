@@ -3,8 +3,7 @@
 
 n = int(input())
 while n > 0:
-    if n > 0:
-        print('*' * 7)
+    print('*' * 7)
     n -= 1
     if n > 0:
         print('*' * 4)
