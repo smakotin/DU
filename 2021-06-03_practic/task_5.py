@@ -2,8 +2,8 @@
 # идущих нулей по горизонтали, вертикали или диагонали.
 import random
 
-rows = 5
-columns = 5
+rows = 10
+columns = 10
 matrix = [[random.randint(0, 1) for i in range(rows)] for j in range(columns)]
 
 # количество нулей подряд по горизонтали
@@ -17,6 +17,7 @@ for i in range(rows):
             if temp > count_zero:
                 count_zero = temp
                 horizontal = i + 1
+                start_col = j + 2 - count_zero
         else:
             temp = 0
 
@@ -31,12 +32,27 @@ for i in range(columns):
             if temp2 > count_zero_vert:
                 count_zero_vert = temp2
                 vertical = i + 1
+                start_row = i - count_zero
+        else:
+            temp2 = 0
+
+# по диагонали с нижнего левого угла
+for i in range(rows):
+    temp2 = 0
+    for j in range(columns):
+        if matrix[j][i] == 0:
+            temp2 += 1
+            if temp2 > count_zero_vert:
+                count_zero_vert = temp2
+                vertical = i + 1
+                start_row = i - count_zero
         else:
             temp2 = 0
 
 
-print(f'Максимальное количество нулей по горизонтали {count_zero} в строке {horizontal}')
-print(f'Максимальное количество нулей по вертикали {count_zero_vert} в столбце {vertical}')
+
+print(f'Максимальное количество нулей по горизонтали {count_zero} в строке {horizontal} начиная со столбца {start_col}')
+print(f'Максимальное количество нулей по вертикали {count_zero_vert} в столбце {vertical} начиная со строки {start_row}')
 for _ in matrix:
     print(_)
 
